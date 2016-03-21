@@ -10,11 +10,12 @@ class RankingController < ApplicationController
     
     private 
     def item_rankings(type)
-        @rankings = Ownership.where(type: @type).group(:item_id).limit(10).order('count_all desc').count
-        @items = []
-        @rankings.length.times{ |num|
-        @items = @items + Item.where(id: [@rankings.keys[num]])
+        @rankings = Ownership.where(type: type).group(:item_id).limit(10).order('count_all desc').count
+        @items_key = []
+        @rankings.length.times{|num|
+            @items_key.push(@rankings.keys[num])
         }
+        @items = Item.find(@items_key)
         render 'show'
     end
 end
