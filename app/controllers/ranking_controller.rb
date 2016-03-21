@@ -1,13 +1,11 @@
 class RankingController < ApplicationController
     
     def have
-        @type = "Have"
-        item_rankings(@type)
+        item_rankings("Have")
     end
     
     def want
-        @type = "Want"
-        item_rankings(@type)
+        item_rankings("Want")
     end
     
     private 
