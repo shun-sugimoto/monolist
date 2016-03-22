@@ -22,9 +22,9 @@
     </div>
     <div class="item-single-side">
       <div class="side-box">
-        <h4 class="side-box-title">Haveしたユーザー(<%= @item.want_users.count %>)</h4>
+        <h4 class="side-box-title">Haveしたユーザー(<%= @item.have_users.count %>)</h4>
         <div class="side-box-body">
-          <% @item.want_users.each do |user| %>
+          <% @item.have_users.each do |user| %>
               <a href = '/users/<%= user.id %>'>
                 <%= gravatar_for user, size: 30 %>
               </a>
@@ -32,9 +32,9 @@
         </div>
       </div>
       <div class="side-box">
-        <h4 class="side-box-title">Wantしたユーザー(<%= @item.have_users.count %>)</h4>
+        <h4 class="side-box-title">Wantしたユーザー(<%= @item.want_users.count %>)</h4>
         <div class="side-box-body">
-          <% @item.have_users.each do |user| %>
+          <% @item.want_users.each do |user| %>
               <a href = '/users/<%= user.id %>'>
                 <%= gravatar_for user, size: 30 %>
               </a>

@@ -15,7 +15,13 @@ class RankingController < ApplicationController
         @rankings.length.times{|num|
             @items_key.push(@rankings.keys[num])
         }
-        @items = Item.find(@items_key)
+        @responses = Item.find(@items_key)
+        
+        # findでは回数順になっていないので、順番を並べ変える。
+        @items=[]
+        @rankings.length.times{|num|
+            @items.push(@responses.find{|item| item.id == @rankings.keys[num]})
+        }
         render 'show'
     end
 end
