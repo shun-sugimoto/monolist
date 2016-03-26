@@ -1,7 +1,8 @@
 
 <div class="container">
   <div class="container-inner inner-default clearfix">
-    <% items.each_with_index do |item, i| %>
+    <% @rankings.each_with_index do |item, i| %>
+      <% @item = Item.find(@rankings.keys[i])%>
       <div class="item-box">
         <% if i<2 %>
           <p class="text-primary"><%= i+1 %>番人気!</p>
@@ -10,17 +11,17 @@
         <% end %>
         <div class="image">
           <div class="img-wrap">
-            <% if item.large_image.present? %>
-              <%= image_tag(item.large_image , alt: item.title) %>
+            <% if @item.large_image.present? %>
+              <%= image_tag(@item.large_image , alt: @item.title) %>
             <% else %>
-              <%= image_tag("no-image.png" , alt: item.title) %>
+              <%= image_tag("no-image.png" , alt: @item.title) %>
             <% end %>
-            <%= render 'items/action' , item: item if logged_in? %>
+            <%= render 'items/action' , item: @item if logged_in? %>
           </div>
         </div>
         <div class="detail">
           <p class="title">
-            <%= item.title %>
+            <%= @item.title %>
           </p>
         </div>
       </div>

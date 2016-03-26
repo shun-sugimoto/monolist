@@ -1,27 +1,22 @@
 class RankingController < ApplicationController
     
     def have
-        item_rankings("Have")
+        item_rankings("have")
     end
     
     def want
-        item_rankings("Want")
+        item_rankings("want")
     end
     
     private 
     def item_rankings(type)
-        @rankings = Ownership.where(type: type).group(:item_id).limit(10).order('count_all desc').count
-        @items_key = []
-        @rankings.length.times{|num|
-            @items_key.push(@rankings.keys[num])
-        }
-        @responses = Item.find(@items_key)
-        
-        # findでは回数順になっていないので、順番を並べ変える。
-        @items=[]
-        @rankings.length.times{|num|
-            @items.push(@responses.find{|item| item.id == @rankings.keys[num]})
-        }
+        if    type == "have"
+            @rankings = Have.group(:item_id).order('count_all desc').limit(10).count
+        elsif type == "want"
+            @rankings = Want.group(:item_id).order('count_all desc').limit(10).count
+        else
+            redirect_to root_path
+        end
         render 'show'
     end
 end
